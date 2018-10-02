@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import Login from '../src/containers/Login/Login'
-import registerServiceWorker from './registerServiceWorker';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import registerServiceWorker from "./registerServiceWorker";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Routes } from "./routes";
 
-ReactDOM.render(<Login />, document.getElementById('root'));
+ReactDOM.render(<Routes />, document.getElementById("root"));
 registerServiceWorker();
