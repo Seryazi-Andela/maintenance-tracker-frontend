@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Button, Form, FormGroup, Label, Input, Col, Alert } from "reactstrap";
+import { NavLink } from "react-router-dom";
 import "../../styles/Login.css";
-import Notifications, { notify } from "react-notify-toast";
+import showToast from "../../utils/utils";
+import Notifications from "react-notify-toast";
 
 export class Login extends Component {
   constructor(props) {
@@ -67,16 +69,24 @@ export class Login extends Component {
     this.setState({ disable: true });
   };
 
-  loginUser = () => {
+  loginUser = event => {
     const { email, password } = this.state;
-    console.log("email ", email);
-    console.log("password ", password);
-    this.showToast();
+    const data = { email: email, password: password };
+    return axios
+      .post("http://127.0.0.1:5000/v1/auth/login", data)
+      .then(response => this.setTokenAndPush(response))
+      .catch(error => {
+        localStorage.removeItem("token");
+        showToast("Login failed! User not recognised", "red", "#FFFFFF");
+      });
   };
 
-  showToast = () => {
-    let myColor = { background: "red", text: "#FFFFFF" };
-    notify.show("Login failed! User not recognised", "custom", 2000, myColor);
+  setTokenAndPush = response => {
+    localStorage.setItem("token", response.data.token);
+    const {
+      history: { push }
+    } = this.props;
+    push(`/dashboard`);
   };
 
   render() {
@@ -86,6 +96,7 @@ export class Login extends Component {
         className="d-flex justify-content-center"
         style={{ marginTop: "100px" }}
       >
+        <Notifications />
         <div className="col-lg-5 float-left loginDiv">
           <h2 className="loginHeader">Maintenance Tracker</h2>
           <Form className="col-lg-12 pl-0 pr-0 float-left">
@@ -97,7 +108,7 @@ export class Login extends Component {
                     type="text"
                     id="loginEmailInput"
                     name="email"
-                    onChange={this.validateEmail}
+                    onChange={event => this.validateEmail(event)}
                   />
                 </Label>
               </Col>
@@ -118,7 +129,7 @@ export class Login extends Component {
                     type="password"
                     id="loginPasswordInput"
                     name="password"
-                    onChange={this.validatePassword}
+                    onChange={event => this.validatePassword(event)}
                   />
                 </Label>
               </Col>
@@ -135,21 +146,25 @@ export class Login extends Component {
               className="ml-0 float-right"
               style={{ marginRight: "31px", marginTop: "8px" }}
             >
-              <Button outline color="info" style={{ marginRight: "8px" }}>
+              <NavLink
+                className="btn btn-outline-info"
+                to="/signup"
+                style={{ marginRight: "8px" }}
+              >
                 SignUp
-              </Button>
+              </NavLink>
               <Button
                 outline
                 color="secondary"
+                id="loginBtn"
                 disabled={disable}
-                onClick={this.loginUser}
+                onClick={event => this.loginUser(event)}
               >
                 Login
               </Button>
             </div>
           </Form>
         </div>
-        <Notifications />
       </div>
     );
   }
