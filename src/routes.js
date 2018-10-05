@@ -4,6 +4,7 @@ import { Route, Switch, BrowserRouter } from "react-router-dom";
 import { SignUp } from "../src/containers/SignUp/SignUp";
 import { Login } from "../src/containers/Login/Login";
 import { Dashboard } from "../src/containers/Dashboard/Dashboard";
+import { CreateRequest } from "../src/containers/CreateRequest/CreateRequest";
 
 export const Routes = props => {
   return (
@@ -12,6 +13,7 @@ export const Routes = props => {
         <Route path="/" exact component={Login} />
         <Route path="/signup" exact component={SignUp} />
         <Route path="/dashboard" exact component={Dashboard} />
+        <Route path="/create" exact component={CreateRequest} />
       </Switch>
     </BrowserRouter>
   );
