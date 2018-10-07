@@ -1,0 +1,20 @@
+.grid {
+  width: 100%;
+  display: inline-grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 0px;
+  margin: auto;
+}
+
+.titleEllipses {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.detailEllipses {
+  width: 100%;
+  overflow: hidden;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+}
