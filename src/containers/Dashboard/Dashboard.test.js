@@ -48,7 +48,7 @@ describe("Dashboard", () => {
           resolved: false
         }
       ];
-      moxios.stubRequest("http://127.0.0.1:5000/v1/users/requests", {
+      moxios.stubRequest("https://maintenance-tracker-skipper.herokuapp.com/v1/users/requests", {
         status: 200,
         response: { requests }
       });
@@ -59,7 +59,7 @@ describe("Dashboard", () => {
 
   describe("getUserRequests", () => {
     it("should throw an error", async () => {
-      moxios.stubRequest("http://127.0.0.1:5000/v1/users/requests", {
+      moxios.stubRequest("https://maintenance-tracker-skipper.herokuapp.com/v1/users/requests", {
         status: 400
       });
       const res = await wrapper.instance().getUserRequests();
@@ -85,7 +85,7 @@ describe("Dashboard", () => {
           resolved: false
         }
       ];
-      moxios.stubRequest("http://127.0.0.1:5000/v1/users/requests", {
+      moxios.stubRequest("https://maintenance-tracker-skipper.herokuapp.com/v1/users/requests", {
         status: 200,
         response: { requests }
       });

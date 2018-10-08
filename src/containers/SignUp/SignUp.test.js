@@ -182,7 +182,7 @@ describe("SignUp", () => {
         validUsername: true,
         validPassword: true
       });
-      moxios.stubRequest("http://127.0.0.1:5000/v1/auth/signup", {
+      moxios.stubRequest("https://maintenance-tracker-skipper.herokuapp.com/v1/auth/signup", {
         status: 201,
         response: { message: "new user created" }
       });

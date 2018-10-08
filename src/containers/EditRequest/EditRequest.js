@@ -56,7 +56,7 @@ export class EditRequest extends Component {
     this.setState({ loader: "loading" });
     const { id } = this.state;
     return axios
-      .put(`http://127.0.0.1:5000/v1/users/requests/${id}`, data, {
+      .put(`https://maintenance-tracker-skipper.herokuapp.com/v1/users/requests/${id}`, data, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
       })
       .then(response => this.showSuccess(response))

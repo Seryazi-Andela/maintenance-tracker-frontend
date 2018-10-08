@@ -44,7 +44,7 @@ describe("AdminRequestCard", () => {
   describe("Approve Button", () => {
     it("should call showApproved()", async () => {
       notify.show = jest.fn();
-      moxios.stubRequest("http://127.0.0.1:5000/v1/requests/1/approve", {
+      moxios.stubRequest("https://maintenance-tracker-skipper.herokuapp.com/v1/requests/1/approve", {
         status: 201
       });
       const spy = jest.spyOn(wrapper.instance(), "showApproved");
@@ -56,7 +56,7 @@ describe("AdminRequestCard", () => {
   describe("Approve Button", () => {
     it("should call showFailure()", async () => {
       notify.show = jest.fn();
-      moxios.stubRequest("http://127.0.0.1:5000/v1/requests/1/approve", {
+      moxios.stubRequest("https://maintenance-tracker-skipper.herokuapp.com/v1/requests/1/approve", {
         status: 400
       });
       const spy = jest.spyOn(wrapper.instance(), "showFailure");
@@ -79,7 +79,7 @@ describe("AdminRequestCard", () => {
   describe("Disapprove Button", () => {
     it("should call showDisapproved()", async () => {
       notify.show = jest.fn();
-      moxios.stubRequest("http://127.0.0.1:5000/v1/requests/1/disapprove", {
+      moxios.stubRequest("https://maintenance-tracker-skipper.herokuapp.com/v1/requests/1/disapprove", {
         status: 201
       });
       const spy = jest.spyOn(wrapper.instance(), "showDisapproved");
@@ -91,7 +91,7 @@ describe("AdminRequestCard", () => {
   describe("Disapprove Button", () => {
     it("should call showFailure()", async () => {
       notify.show = jest.fn();
-      moxios.stubRequest("http://127.0.0.1:5000/v1/requests/1/disapprove", {
+      moxios.stubRequest("https://maintenance-tracker-skipper.herokuapp.com/v1/requests/1/disapprove", {
         status: 400
       });
       const spy = jest.spyOn(wrapper.instance(), "showFailure");
@@ -114,7 +114,7 @@ describe("AdminRequestCard", () => {
   describe("Resolve Button", () => {
     it("should call showResolved()", async () => {
       notify.show = jest.fn();
-      moxios.stubRequest("http://127.0.0.1:5000/v1/requests/1/resolve", {
+      moxios.stubRequest("https://maintenance-tracker-skipper.herokuapp.com/v1/requests/1/resolve", {
         status: 201
       });
       const spy = jest.spyOn(wrapper.instance(), "showResolved");
@@ -126,7 +126,7 @@ describe("AdminRequestCard", () => {
   describe("Resolve Button", () => {
     it("should call showFailure()", async () => {
       notify.show = jest.fn();
-      moxios.stubRequest("http://127.0.0.1:5000/v1/requests/1/resolve", {
+      moxios.stubRequest("https://maintenance-tracker-skipper.herokuapp.com/v1/requests/1/resolve", {
         status: 400
       });
       const spy = jest.spyOn(wrapper.instance(), "showFailure");

@@ -117,7 +117,7 @@ export class SignUp extends Component {
       };
       this.setState({ loader: "loading" });
       return axios
-        .post("http://127.0.0.1:5000/v1/auth/signup", data)
+        .post("https://maintenance-tracker-skipper.herokuapp.com/v1/auth/signup", data)
         .then(response => {
           this.setState({ loader: "" });
           return this.pushTologin();
