@@ -95,6 +95,7 @@ export class Login extends Component {
       history: { push }
     } = this.props;
     push(`/dashboard`);
+    window.location.reload();
   };
 
   render() {

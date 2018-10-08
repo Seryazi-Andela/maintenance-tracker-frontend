@@ -32,4 +32,15 @@ describe("NavBar", () => {
       expect(wrapper.instance().state.isOpen).toBe(true);
     });
   });
+
+  describe("NavLink", () => {
+    it("call logout", () => {
+      const spy = jest.spyOn(wrapper.instance(), "logout");
+      wrapper.instance().forceUpdate();
+
+      const btn = wrapper.find("NavLink").last();
+      btn.simulate("click", { preventDefault: () => {} });
+      expect(spy).toHaveBeenCalled();
+    });
+  });
 });
