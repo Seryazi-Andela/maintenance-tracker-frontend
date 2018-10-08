@@ -20,7 +20,7 @@ export class AdminRequestCard extends Component {
     const { id, title } = this.state;
     return axios
       .put(
-        `http://127.0.0.1:5000/v1/requests/${id}/approve`,
+        `https://maintenance-tracker-skipper.herokuapp.com/v1/requests/${id}/approve`,
         {},
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
@@ -38,7 +38,7 @@ export class AdminRequestCard extends Component {
     const { id, title } = this.state;
     return axios
       .put(
-        `http://127.0.0.1:5000/v1/requests/${id}/disapprove`,
+        `https://maintenance-tracker-skipper.herokuapp.com/v1/requests/${id}/disapprove`,
         {},
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
@@ -56,7 +56,7 @@ export class AdminRequestCard extends Component {
     const { id, title } = this.state;
     return axios
       .put(
-        `http://127.0.0.1:5000/v1/requests/${id}/resolve`,
+        `https://maintenance-tracker-skipper.herokuapp.com/v1/requests/${id}/resolve`,
         {},
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }

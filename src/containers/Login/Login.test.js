@@ -130,7 +130,7 @@ describe("login", () => {
         email: "user@gamil.com",
         password: "aaaaaaaaaa"
       });
-      moxios.stubRequest("http://127.0.0.1:5000/v1/auth/login", {
+      moxios.stubRequest("https://maintenance-tracker-skipper.herokuapp.com/v1/auth/login", {
         status: 200,
         response: { token: "sssssssssss" }
       });

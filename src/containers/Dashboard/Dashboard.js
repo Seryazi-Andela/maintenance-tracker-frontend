@@ -26,7 +26,7 @@ export class Dashboard extends Component {
 
   getUserRequests = () =>
     axios
-      .get("http://127.0.0.1:5000/v1/users/requests", {
+      .get("https://maintenance-tracker-skipper.herokuapp.com/v1/users/requests", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
       })
       .then(response => {

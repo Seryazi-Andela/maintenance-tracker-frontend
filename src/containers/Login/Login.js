@@ -77,7 +77,7 @@ export class Login extends Component {
     const data = { email: email, password: password };
     this.setState({ loader: "loading" });
     return axios
-      .post("http://127.0.0.1:5000/v1/auth/login", data)
+      .post("https://maintenance-tracker-skipper.herokuapp.com/v1/auth/login", data)
       .then(response => {
         this.setState({ loader: "" });
         return this.setTokenAndPush(response);

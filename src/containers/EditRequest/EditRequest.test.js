@@ -85,7 +85,7 @@ describe("EditRequest", () => {
         title: "this a title",
         details: "these are some details"
       });
-      moxios.stubRequest("http://127.0.0.1:5000/v1/users/requests/1", {
+      moxios.stubRequest("https://maintenance-tracker-skipper.herokuapp.com/v1/users/requests/1", {
         status: 201,
         response: { data: { message: "Success! entry edited" } }
       });
@@ -103,7 +103,7 @@ describe("EditRequest", () => {
         title: "this a title",
         details: "these are some details"
       });
-      moxios.stubRequest("http://127.0.0.1:5000/v1/users/requests/1", {
+      moxios.stubRequest("https://maintenance-tracker-skipper.herokuapp.com/v1/users/requests/1", {
         status: 400,
         response: { data: { message: "admin can not create request" } }
       });

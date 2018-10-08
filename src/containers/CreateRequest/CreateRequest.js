@@ -48,7 +48,7 @@ export class CreateRequest extends Component {
   submitToAPI = data => {
     this.setState({ loader: "loading" });
     return axios
-      .post("http://127.0.0.1:5000/v1/users/requests", data, {
+      .post("https://maintenance-tracker-skipper.herokuapp.com/v1/users/requests", data, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
       })
       .then(response => this.showSuccess(response))
