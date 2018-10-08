@@ -9,6 +9,7 @@ import {
   Col
 } from "reactstrap";
 import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
 import "../../styles/Dashboard.css";
 
 export class UserRequestCard extends Component {
@@ -21,12 +22,10 @@ export class UserRequestCard extends Component {
     };
   }
 
-  editRequest = event => {};
-
   deleteRequest = event => {};
 
   render() {
-    const { title, details } = this.state;
+    const { id, title, details } = this.state;
     return (
       <div>
         <Row>
@@ -40,14 +39,13 @@ export class UserRequestCard extends Component {
                 >
                   {details}
                 </CardText>
-                <Button
-                  outline
-                  color="secondary"
+                <NavLink
+                  className="btn btn-outline-secondary"
+                  to={{ pathname: "/edit", state: { id, title, details } }}
                   style={{ marginRight: "4px" }}
-                  onClick={event => this.editRequest(event)}
                 >
                   Edit
-                </Button>
+                </NavLink>
                 <Button
                   outline
                   color="danger"

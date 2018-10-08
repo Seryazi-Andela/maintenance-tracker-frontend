@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { NavBar } from "../../components/NavBar/NavBar";
-import Wrapper from "../../hoc/Wrapper/Wrapper";
 import "../../styles/Loader.css";
 import "../../styles/Dashboard.css";
 import { UserRequestCard } from "../../components/UserRequestCard/UserRequestCard";
@@ -12,7 +11,7 @@ export class Dashboard extends Component {
     this.state = {
       requests: [],
       showIndicator: "none",
-      loader: "loading"
+      loader: "loading",
     };
   }
 
