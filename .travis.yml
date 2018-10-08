@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - 'stable'
+before_install:
+  - 'nvm install-latest-npm'
+script:
+  - npm run test -- --coverage --no-cache
+after_success:
+  - COVERALLS_REPO_TOKEN=GmnqCKgwAofNC4xl6IG0whLog5C0tef2S npm run coveralls

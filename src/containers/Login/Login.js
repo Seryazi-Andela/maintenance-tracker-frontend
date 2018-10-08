@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Button, Form, FormGroup, Label, Input, Col, Alert } from "reactstrap";
+import Wrapper from "../../hoc/Wrapper/Wrapper";
+import { NavLink } from "react-router-dom";
 import "../../styles/Login.css";
-import Notifications, { notify } from "react-notify-toast";
+import showToast from "../../utils/utils";
+import Notifications from "react-notify-toast";
+import "../../styles/Loader.css";
 
 export class Login extends Component {
   constructor(props) {
@@ -10,6 +14,7 @@ export class Login extends Component {
     this.state = {
       email: "",
       password: "",
+      loader: "",
       showEmailAlert: false,
       showPasswordAlert: false,
       disable: true,
@@ -67,90 +72,111 @@ export class Login extends Component {
     this.setState({ disable: true });
   };
 
-  loginUser = () => {
+  loginUser = event => {
     const { email, password } = this.state;
-    console.log("email ", email);
-    console.log("password ", password);
-    this.showToast();
+    const data = { email: email, password: password };
+    this.setState({ loader: "loading" });
+    return axios
+      .post("http://127.0.0.1:5000/v1/auth/login", data)
+      .then(response => {
+        this.setState({ loader: "" });
+        return this.setTokenAndPush(response);
+      })
+      .catch(error => {
+        this.setState({ loader: "" });
+        localStorage.removeItem("token");
+        showToast("Login failed! User not recognised", "red", "#FFFFFF");
+      });
   };
 
-  showToast = () => {
-    let myColor = { background: "red", text: "#FFFFFF" };
-    notify.show("Login failed! User not recognised", "custom", 2000, myColor);
+  setTokenAndPush = response => {
+    localStorage.setItem("token", response.data.token);
+    const {
+      history: { push }
+    } = this.props;
+    push(`/dashboard`);
   };
 
   render() {
-    const { showEmailAlert, showPasswordAlert, disable } = this.state;
+    const { loader, showEmailAlert, showPasswordAlert, disable } = this.state;
     return (
-      <div
-        className="d-flex justify-content-center"
-        style={{ marginTop: "100px" }}
-      >
-        <div className="col-lg-5 float-left loginDiv">
-          <h2 className="loginHeader">Maintenance Tracker</h2>
-          <Form className="col-lg-12 pl-0 pr-0 float-left">
-            <FormGroup row className="ml-0 mr-0">
-              <Col>
-                <Label lg={12} for="loginEmailInput">
-                  Email
-                  <Input
-                    type="text"
-                    id="loginEmailInput"
-                    name="email"
-                    onChange={this.validateEmail}
-                  />
-                </Label>
-              </Col>
-            </FormGroup>
-            <Alert
-              color="info"
-              isOpen={showEmailAlert}
-              toggle={this.onDismissEmailAlert}
-              style={{ width: "90%", margin: "0 auto" }}
-            >
-              Please enter a valid email!
-            </Alert>
-            <FormGroup row className="ml-0 mr-0">
-              <Col>
-                <Label lg={12} for="loginPasswordInput">
-                  Password
-                  <Input
-                    type="password"
-                    id="loginPasswordInput"
-                    name="password"
-                    onChange={this.validatePassword}
-                  />
-                </Label>
-              </Col>
-            </FormGroup>
-            <Alert
-              color="info"
-              isOpen={showPasswordAlert}
-              toggle={this.onDismissPasswordAlert}
-              style={{ width: "90%", margin: "0 auto" }}
-            >
-              Minimum 8 aplha-numeric characters required
-            </Alert>
-            <div
-              className="ml-0 float-right"
-              style={{ marginRight: "31px", marginTop: "8px" }}
-            >
-              <Button outline color="info" style={{ marginRight: "8px" }}>
-                SignUp
-              </Button>
-              <Button
-                outline
-                color="secondary"
-                disabled={disable}
-                onClick={this.loginUser}
+      <Wrapper>
+        <div className={`${loader}`} />
+        <div
+          className="d-flex justify-content-center"
+          style={{ marginTop: "100px" }}
+        >
+          <Notifications />
+          <div className="col-lg-5 float-left loginDiv">
+            <h2 className="loginHeader">Maintenance Tracker</h2>
+            <Form className="col-lg-12 pl-0 pr-0 float-left">
+              <FormGroup row className="ml-0 mr-0">
+                <Col>
+                  <Label lg={12} for="loginEmailInput">
+                    Email
+                    <Input
+                      type="text"
+                      id="loginEmailInput"
+                      name="email"
+                      onChange={event => this.validateEmail(event)}
+                    />
+                  </Label>
+                </Col>
+              </FormGroup>
+              <Alert
+                color="info"
+                isOpen={showEmailAlert}
+                toggle={this.onDismissEmailAlert}
+                style={{ width: "90%", margin: "0 auto" }}
               >
-                Login
-              </Button>
-            </div>
-          </Form>
+                Please enter a valid email!
+              </Alert>
+              <FormGroup row className="ml-0 mr-0">
+                <Col>
+                  <Label lg={12} for="loginPasswordInput">
+                    Password
+                    <Input
+                      type="password"
+                      id="loginPasswordInput"
+                      name="password"
+                      onChange={event => this.validatePassword(event)}
+                    />
+                  </Label>
+                </Col>
+              </FormGroup>
+              <Alert
+                color="info"
+                isOpen={showPasswordAlert}
+                toggle={this.onDismissPasswordAlert}
+                style={{ width: "90%", margin: "0 auto" }}
+              >
+                Minimum 8 aplha-numeric characters required
+              </Alert>
+              <div
+                className="ml-0 float-right"
+                style={{ marginRight: "31px", marginTop: "8px" }}
+              >
+                <NavLink
+                  className="btn btn-outline-info"
+                  to="/signup"
+                  style={{ marginRight: "8px" }}
+                >
+                  SignUp
+                </NavLink>
+                <Button
+                  outline
+                  color="secondary"
+                  id="loginBtn"
+                  disabled={disable}
+                  onClick={event => this.loginUser(event)}
+                >
+                  Login
+                </Button>
+              </div>
+            </Form>
+          </div>
         </div>
-        <Notifications />
-      </div>
+      </Wrapper>
     );
   }
 }
