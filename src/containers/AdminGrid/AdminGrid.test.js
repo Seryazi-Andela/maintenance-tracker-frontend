@@ -2,19 +2,19 @@ import { mount, shallow } from "enzyme";
 import moxios from "moxios";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import { Dashboard } from "../Dashboard/Dashboard";
+import { AdminGrid } from "../AdminGrid/AdminGrid";
 
-describe("Dashboard", () => {
+describe("AdminGrid", () => {
   let wrapper;
   let parentWrapper;
   beforeEach(() => {
     moxios.install();
     parentWrapper = mount(
       <BrowserRouter>
-        <Dashboard />
+        <AdminGrid />
       </BrowserRouter>
     );
-    wrapper = parentWrapper.find(Dashboard);
+    wrapper = parentWrapper.find(AdminGrid);
   });
 
   afterEach(() => {
@@ -48,7 +48,7 @@ describe("Dashboard", () => {
           resolved: false
         }
       ];
-      moxios.stubRequest("http://127.0.0.1:5000/v1/users/requests", {
+      moxios.stubRequest("http://127.0.0.1:5000/v1/requests", {
         status: 200,
         response: { requests }
       });
@@ -59,7 +59,7 @@ describe("Dashboard", () => {
 
   describe("getUserRequests", () => {
     it("should throw an error", async () => {
-      moxios.stubRequest("http://127.0.0.1:5000/v1/users/requests", {
+      moxios.stubRequest("http://127.0.0.1:5000/v1/requests", {
         status: 400
       });
       const res = await wrapper.instance().getUserRequests();
@@ -85,7 +85,7 @@ describe("Dashboard", () => {
           resolved: false
         }
       ];
-      moxios.stubRequest("http://127.0.0.1:5000/v1/users/requests", {
+      moxios.stubRequest("http://127.0.0.1:5000/v1/requests", {
         status: 200,
         response: { requests }
       });

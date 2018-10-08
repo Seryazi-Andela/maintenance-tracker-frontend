@@ -6,6 +6,7 @@ import { Login } from "../src/containers/Login/Login";
 import { Dashboard } from "../src/containers/Dashboard/Dashboard";
 import { CreateRequest } from "../src/containers/CreateRequest/CreateRequest";
 import { EditRequest } from "../src/containers/EditRequest/EditRequest";
+import { AdminGrid } from "../src/containers/AdminGrid/AdminGrid";
 
 export const Routes = props => {
   return (
@@ -16,6 +17,7 @@ export const Routes = props => {
         <Route path="/dashboard" exact component={Dashboard} />
         <Route path="/create" exact component={CreateRequest} />
         <Route path="/edit" exact component={EditRequest} />
+        <Route path="/requests" exact component={AdminGrid} />
       </Switch>
     </BrowserRouter>
   );
