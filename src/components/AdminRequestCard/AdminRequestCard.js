@@ -52,6 +52,24 @@ export class AdminRequestCard extends Component {
       });
   };
 
+  resolve = event => {
+    const { id, title } = this.state;
+    return axios
+      .put(
+        `http://127.0.0.1:5000/v1/requests/${id}/resolve`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+        }
+      )
+      .then(response => {
+        this.showResolved(title);
+      })
+      .catch(error => {
+        this.showFailure();
+      });
+  };
+
   showApproved = title => {
     const msg = title + " approved";
     showToast(msg, "green", "#FFFFFF");
@@ -62,10 +80,10 @@ export class AdminRequestCard extends Component {
     showToast(msg, "red", "#FFFFFF");
   };
 
-  // showResolved = title => {
-  //   const msg = title + " resolved";
-  //   showToast(msg, "dimgray", "#FFFFFF");
-  // };
+  showResolved = title => {
+    const msg = title + " resolved";
+    showToast(msg, "dimgray", "#FFFFFF");
+  };
 
   showFailure = () => {
     const msg = "Operation failed! ";
@@ -114,6 +132,7 @@ export class AdminRequestCard extends Component {
                 </button>
                 <button
                   id="resolveBtn"
+                  onClick={event => this.resolve(event)}
                   className="btn btn-outline-secondary btn-sm"
                   style={{
                     fontSize: "10px",

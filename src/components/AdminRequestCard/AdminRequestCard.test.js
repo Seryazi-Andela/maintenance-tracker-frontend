@@ -99,4 +99,40 @@ describe("AdminRequestCard", () => {
       expect(spy).toHaveBeenCalled();
     });
   });
+
+  describe("Resolve Button", () => {
+    it("should call resolve() ", () => {
+      const spy = jest.spyOn(wrapper.instance(), "resolve");
+      wrapper.instance().forceUpdate();
+
+      const btn = wrapper.find("#resolveBtn");
+      btn.simulate("click", { preventDefault: () => {} });
+      expect(spy).toHaveBeenCalled();
+    });
+  });
+
+  describe("Resolve Button", () => {
+    it("should call showResolved()", async () => {
+      notify.show = jest.fn();
+      moxios.stubRequest("http://127.0.0.1:5000/v1/requests/1/resolve", {
+        status: 201
+      });
+      const spy = jest.spyOn(wrapper.instance(), "showResolved");
+      await wrapper.instance().resolve();
+      expect(spy).toHaveBeenCalled();
+    });
+  });
+
+  describe("Resolve Button", () => {
+    it("should call showFailure()", async () => {
+      notify.show = jest.fn();
+      moxios.stubRequest("http://127.0.0.1:5000/v1/requests/1/resolve", {
+        status: 400
+      });
+      const spy = jest.spyOn(wrapper.instance(), "showFailure");
+      await wrapper.instance().resolve();
+      expect(spy).toHaveBeenCalled();
+    });
+  });
+  // this is a new pull request
 });
