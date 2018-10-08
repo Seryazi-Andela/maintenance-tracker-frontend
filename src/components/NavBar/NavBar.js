@@ -24,6 +24,11 @@ export class NavBar extends Component {
     });
   }
 
+  logout = () => {
+    localStorage.removeItem("token");
+    window.location.replace("/");
+  };
+
   render() {
     const { isOpen } = this.state;
     return (
@@ -43,7 +48,7 @@ export class NavBar extends Component {
                 <NavLink href="/requests">Requests</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/dashboard">Logout</NavLink>
+                <NavLink onClick={() => this.logout()}>Logout</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
