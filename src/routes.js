@@ -5,6 +5,7 @@ import { SignUp } from "../src/containers/SignUp/SignUp";
 import { Login } from "../src/containers/Login/Login";
 import { Dashboard } from "../src/containers/Dashboard/Dashboard";
 import { CreateRequest } from "../src/containers/CreateRequest/CreateRequest";
+import { EditRequest } from "../src/containers/EditRequest/EditRequest";
 
 export const Routes = props => {
   return (
@@ -14,6 +15,7 @@ export const Routes = props => {
         <Route path="/signup" exact component={SignUp} />
         <Route path="/dashboard" exact component={Dashboard} />
         <Route path="/create" exact component={CreateRequest} />
+        <Route path="/edit" exact component={EditRequest} />
       </Switch>
     </BrowserRouter>
   );
