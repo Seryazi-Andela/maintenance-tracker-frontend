@@ -6,4 +6,4 @@ before_install:
 script:
   - npm run test -- --coverage --no-cache
 after_success:
-  - COVERALLS_REPO_TOKEN=$coveralls_repo_token npm run coveralls
+  - COVERALLS_REPO_TOKEN=GmnqCKgwAofNC4xl6IG0whLog5C0tef2S npm run coveralls

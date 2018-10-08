@@ -3,9 +3,9 @@ import axios from "axios";
 import { NavBar } from "../../components/NavBar/NavBar";
 import "../../styles/Loader.css";
 import "../../styles/Dashboard.css";
-import { UserRequestCard } from "../../components/UserRequestCard/UserRequestCard";
+import { AdminRequestCard } from "../../components/AdminRequestCard/AdminRequestCard";
 
-export class Dashboard extends Component {
+export class AdminGrid extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +26,7 @@ export class Dashboard extends Component {
 
   getUserRequests = () =>
     axios
-      .get("http://127.0.0.1:5000/v1/users/requests", {
+      .get("http://127.0.0.1:5000/v1/requests", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
       })
       .then(response => {
@@ -53,6 +53,8 @@ export class Dashboard extends Component {
     }
   };
 
+  updateGrid = () => this.fetchData();
+
   render() {
     const { showIndicator, requests, loader } = this.state;
     return (
@@ -66,7 +68,7 @@ export class Dashboard extends Component {
             marginTop: "40px"
           }}
         >
-          It seems you haven't made any requests yet.
+          There are no requests yet or you are not authorized to view requests.
         </h3>
         <div className="container" style={{ marginTop: "20px" }}>
           <div className="row">
@@ -77,10 +79,11 @@ export class Dashboard extends Component {
                   className="col-lg-3"
                   style={{ marginBottom: "20px" }}
                 >
-                  <UserRequestCard
+                  <AdminRequestCard
                     id={request.id}
                     title={request.header}
                     details={request.details}
+                    approved={request.approved}
                     updateGrid={this.updateGrid}
                   />
                 </div>
@@ -92,4 +95,4 @@ export class Dashboard extends Component {
     );
   }
 }
-export default Dashboard;
+export default AdminGrid;

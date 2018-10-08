@@ -4,11 +4,11 @@ import {
   CardText,
   CardBody,
   CardTitle,
-  Button,
   Row,
   Col
 } from "reactstrap";
 import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
 import "../../styles/Dashboard.css";
 
 export class UserRequestCard extends Component {
@@ -21,12 +21,8 @@ export class UserRequestCard extends Component {
     };
   }
 
-  editRequest = event => {};
-
-  deleteRequest = event => {};
-
   render() {
-    const { title, details } = this.state;
+    const { id, title, details } = this.state;
     return (
       <div>
         <Row>
@@ -40,21 +36,13 @@ export class UserRequestCard extends Component {
                 >
                   {details}
                 </CardText>
-                <Button
-                  outline
-                  color="secondary"
+                <NavLink
+                  className="btn btn-outline-secondary"
+                  to={{ pathname: "/edit", state: { id, title, details } }}
                   style={{ marginRight: "4px" }}
-                  onClick={event => this.editRequest(event)}
                 >
                   Edit
-                </Button>
-                <Button
-                  outline
-                  color="danger"
-                  onClick={event => this.deleteRequest(event)}
-                >
-                  Delete
-                </Button>
+                </NavLink>
               </CardBody>
             </Card>
           </Col>
@@ -66,7 +54,6 @@ export class UserRequestCard extends Component {
 UserRequestCard.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  details: PropTypes.string.isRequired,
-  updateGrid: PropTypes.func
+  details: PropTypes.string.isRequired
 };
 export default UserRequestCard;

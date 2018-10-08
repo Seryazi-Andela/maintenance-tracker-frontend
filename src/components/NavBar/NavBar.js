@@ -40,7 +40,7 @@ export class NavBar extends Component {
                 <NavLink href="/create">Create</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/dashboard">Requests</NavLink>
+                <NavLink href="/requests">Requests</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/dashboard">Logout</NavLink>
