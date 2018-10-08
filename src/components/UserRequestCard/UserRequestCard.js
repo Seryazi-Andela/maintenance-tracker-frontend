@@ -4,7 +4,6 @@ import {
   CardText,
   CardBody,
   CardTitle,
-  Button,
   Row,
   Col
 } from "reactstrap";
@@ -21,8 +20,6 @@ export class UserRequestCard extends Component {
       details: props.details
     };
   }
-
-  deleteRequest = event => {};
 
   render() {
     const { id, title, details } = this.state;
@@ -46,13 +43,6 @@ export class UserRequestCard extends Component {
                 >
                   Edit
                 </NavLink>
-                <Button
-                  outline
-                  color="danger"
-                  onClick={event => this.deleteRequest(event)}
-                >
-                  Delete
-                </Button>
               </CardBody>
             </Card>
           </Col>
@@ -64,7 +54,6 @@ export class UserRequestCard extends Component {
 UserRequestCard.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  details: PropTypes.string.isRequired,
-  updateGrid: PropTypes.func
+  details: PropTypes.string.isRequired
 };
 export default UserRequestCard;
